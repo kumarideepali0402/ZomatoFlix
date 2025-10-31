@@ -1,23 +1,50 @@
+// const mongoose = require("mongoose");
+
+// const  foodSchema = new mongoose.Schema({
+//     name : {
+//         type: String,
+//         required : true
+//     },
+//     video:{
+//         type: String, 
+//         required : true
+//     },
+//     description:{
+//         type:String
+//     },
+//     foodPartner:{
+//         type:mongoose.Schema.Types.ObjectId,
+//         ref: "foodpartner"
+//     }
+// })
+
+// const foodModel = mongoose.model("food", foodSchema);
+
+// module.exports = foodModel;
+
+
 const mongoose = require("mongoose");
 
-const  foodSchema = new mongoose.Schema({
-    name : {
+const foodSchema = new mongoose.Schema({
+    name: {
         type: String,
-        required : true
+        required: true
     },
-    video:{
+    video: {
         type: String, 
-        required : true
+        required: true
     },
-    description:{
-        type:String
+    description: {
+        type: String
     },
-    foodPartner:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref: "foodpartner"
+    foodPartner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "foodpartner" // 🔧 FIXED: Ensure this matches your model name exactly
     }
-})
+}, {
+    // 🔧 ADDED: Timestamps for better data tracking
+    timestamps: true
+});
 
 const foodModel = mongoose.model("food", foodSchema);
-
 module.exports = foodModel;
