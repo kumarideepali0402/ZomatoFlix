@@ -35,7 +35,7 @@ import UserLogin from "../Pages/auth/UserLogin";
 import UserRegister from "../Pages/auth/UserRegister";
 import FoodPartnerLogin from "../Pages/auth/FoodPartnerLogin";
 import FoodPartnerRegister from "../Pages/auth/FoodPartnerRegister";
-import CreateFood from "../Pages/foodPartner/CreateFoodPartner";
+import CreateFood from "../Pages/foodPartner/CreateFood";
 import ReelFeed from "../Components/reelFeed"; // 🔧 FIXED: Correct import path
 import Profile from "../Pages/foodPartner/Profile";
 

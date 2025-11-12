@@ -131,7 +131,56 @@ async function authUserMiddleware(req, res, next) {
     }
 }
 
+async function authBothUserAndFoodPartner(req, res, next){
+    const token = req.cookies.token;
+    if(!token) {
+        return res.status(401).json({
+            msg: "PLease login first"
+        });
+    }
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        if(decoded.type != "user" && decoded.type != "foodPartner") {
+            return res.json({
+                msg: "login as user or foodPartner first"
+            })
+
+        } 
+        if (decoded.type === 'user') {
+            const user = await userModel.findById(decoded.id);
+
+            if (!user ) {
+                 return res.status(401).json({
+                    msg: "User not found"
+                });
+            }
+            req.user = user;
+            
+        }
+        if (decoded.type === 'foodPartner') {
+            const foodPartner = await foodPartnerModel.findById(decoded.id);
+
+            if (!foodPartner ) {
+                 return res.status(401).json({
+                    msg: "foodPartner not found"
+                });
+            }
+            req.foodPartner = foodPartner;
+           
+
+        }
+        next();
+
+    } catch (error) {
+        console.error("Auth middleware error:", error);
+        return res.status(401).json({
+            msg: "Invalid token"
+        });
+    }
+}
+
 module.exports = {
     authFoodPartnerMiddleware,
-    authUserMiddleware
+    authUserMiddleware,
+    authBothUserAndFoodPartner
 }

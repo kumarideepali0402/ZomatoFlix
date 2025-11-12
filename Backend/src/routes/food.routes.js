@@ -1,18 +1,4 @@
-// const express = require("express");
-// const router = express.Router();
-// const authMiddleware = require("../middlewares/auth.middleware")
-// const foodController = require("../Controllers/food.controllers")
-// const multer = require('multer');
 
-// const upload= multer({
-//     storage : multer.memoryStorage(),
-// })
-
-// // POST /api/food [protected]
-// router.post('/',upload.single("video"), authMiddleware.authFoodPartnerMiddleware, foodController.createFood)
-
-// // GET /api/food/ protected
-// router.get('/', authMiddleware.authUserMiddleware, foodController.getFoodItems)
 
 
 // module.exports = router
@@ -37,7 +23,7 @@ const upload = multer({
     }
 });
 
-// POST /api/food [protected] - CORRECT ORDER
+// POST /api/food [protected] 
 router.post('/', 
     authMiddleware.authFoodPartnerMiddleware,  // Authentication first
     upload.single("video"),                    // File upload after
@@ -46,9 +32,12 @@ router.post('/',
 
 // GET /api/food/ protected
 router.get('/', 
-    authMiddleware.authUserMiddleware, 
+    authMiddleware.authBothUserAndFoodPartner, 
     foodController.getFoodItems
 );
+
+
+router.post('/like',authMiddleware.authUserMiddleware,foodController.likeFood);
 
 
 module.exports = router;

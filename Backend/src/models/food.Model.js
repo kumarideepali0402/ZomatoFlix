@@ -39,7 +39,8 @@ const foodSchema = new mongoose.Schema({
     },
     foodPartner: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "foodpartner" // 🔧 FIXED: Ensure this matches your model name exactly
+        ref: "foodpartner" 
+        
     }
 }, {
     // 🔧 ADDED: Timestamps for better data tracking
