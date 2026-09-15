@@ -32,10 +32,10 @@ async function registerUser(req, res) {
 
     const token = jwt.sign({
         id : user._id,
-        type:'user', // 🔧 ADDED: Type field to distinguish user type
+        type:'user', 
     },process.env.JWT_SECRET)
 
-    // 🔧 FIXED: Changed from "userToken" to "token" for consistency
+    
     res.cookie("token", token)
     res.status(201).json({
         msg:"user registered successfully",
